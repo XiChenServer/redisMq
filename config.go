@@ -2,11 +2,14 @@ package redmq
 
 import "time"
 
+// ProducerOptions 生产者配置
 type ProducerOptions struct {
-	msgQueueLen int
+	msgQueueLen int //消息队列的长度
 }
 
 type ProducerOption func(opts *ProducerOptions)
+
+//下面的代码都是用于来设置生产者方面的
 
 func WithMsgQueueLen(len int) ProducerOption {
 	return func(opts *ProducerOptions) {
@@ -20,6 +23,7 @@ func repairProducer(opts *ProducerOptions) {
 	}
 }
 
+// ConsumerOptions 消费者配置
 type ConsumerOptions struct {
 	// 每轮接收消息的超时时长
 	receiveTimeout time.Duration
@@ -34,6 +38,8 @@ type ConsumerOptions struct {
 }
 
 type ConsumerOption func(opts *ConsumerOptions)
+
+//下面的代码都是用于来设置消费者方面的
 
 func WithReceiveTimeout(timeout time.Duration) ConsumerOption {
 	return func(opts *ConsumerOptions) {

@@ -6,14 +6,15 @@ import (
 	. "redisMq/redis"
 )
 
-// 死信队列，当消息处理失败达到指定次数时，会被投递到此处
+// DeadLetterMailbox 死信队列，当消息处理失败达到指定次数时，会被投递到此处
 type DeadLetterMailbox interface {
 	Deliver(ctx context.Context, msg *MsgEntity) error
 }
 
-// 默认使用的死信队列，仅仅对消息失败的信息进行日志打印
+// DeadLetterLogger 默认使用的死信队列，仅仅对消息失败的信息进行日志打印
 type DeadLetterLogger struct{}
 
+// NewDeadLetterLogger 用于初始化死信队列
 func NewDeadLetterLogger() *DeadLetterLogger {
 	return &DeadLetterLogger{}
 }
